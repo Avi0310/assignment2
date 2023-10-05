@@ -1,4 +1,4 @@
-Country,Year,Status,Life expectancy ,GDP,Population,Region
+Country,Year,Status,life_expectancy,GDP,Population,Region
 Afghanistan,2015,Developing,65,584.25921,33736494,Asia & Pacific
 Afghanistan,2014,Developing,59.9,612.696514,327582,Asia & Pacific
 Afghanistan,2013,Developing,59.9,631.744976,31731688,Asia & Pacific
