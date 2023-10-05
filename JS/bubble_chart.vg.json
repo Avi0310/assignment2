@@ -23,7 +23,7 @@
         "mark": {
           "type": "text",
           "fontSize": 100,
-          "x": 520,
+          "x": 620,
           "y": 250,
           "opacity": 0.06
         },
