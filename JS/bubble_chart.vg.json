@@ -12,7 +12,7 @@
       }
     }},
     
-    "width": 800,
+    "width": 1200,
     "height": 500,
     "layer": [
       {
@@ -23,7 +23,7 @@
         "mark": {
           "type": "text",
           "fontSize": 100,
-          "x": 720,
+          "x": 520,
           "y": 250,
           "opacity": 0.06
         },
