@@ -1,8 +1,18 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "description": "An interactive scatter plot of global health statistics by Country and Year.",
-    "data": {"url": "https://raw.githubusercontent.com/Avi0310/homeworkW10/master/Data/cleaned_data.csv"},
-    "width": 800,
+    "data": {"url": "https://raw.githubusercontent.com/Avi0310/homeworkW10/master/Data/cleaned_second_data.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Year": "number",
+        "life_expectancy": "number",
+        "GDP": "number",
+        "Population": "number"
+      }
+    }},
+    
+    "width": 1400,
     "height": 500,
     "layer": [
       {
@@ -13,7 +23,7 @@
         "mark": {
           "type": "text",
           "fontSize": 100,
-          "x": 420,
+          "x": 720,
           "y": 250,
           "opacity": 0.06
         },
@@ -33,9 +43,10 @@
                   {"id": "South/Central America", "name": "South/Central America"},
                   {"id": "North America", "name": "North America"},
                   {"id": "Asia & Pacific", "name": "Asia & Pacific"},
-                  {"id": "Middle East", "name": "Middle East"},
+                  {"id": "Middle east", "name": "Middle East"},
                   {"id": "Europe", "name": "Europe"},
-                  {"id": "South/Latin America", "name": "South/Latin America"}
+                  {"id": "South/Latin America", "name": "South/Latin America"},
+                  {"id": "#N/A", "name": "Africa"}
                 ]
               }
             }
@@ -46,14 +57,19 @@
             "field": "GDP",
             "type": "quantitative",
             "scale": {"domain": [1, 120000]},
-            "axis": {"tickCount": 5, "title": "GDP"}
+            "axis": {"tickCount": 50, "title": "GDP"}
           },
           "y": {
             "field": "life_expectancy",
             "type": "quantitative",
-            "scale": {"domain": [20, 85]},
+            "scale": {"domain": [20, 100]},
             "axis": {"tickCount": 5, "title": "Life Expectancy"}
+          },
+          "opacity": {
+            "condition": {"param": "filt_legend", "value": 1},
+            "value": 0.1
           }
+          
         },
         "layer": [
           {
@@ -68,21 +84,26 @@
               "order": {"field": "Year"},
               "opacity": {
                 "condition": {
+                  
                   "test": {"or": [
                     {"param": "hovered", "empty": false},
-                    {"param": "clicked", "empty": false}
+                    {"param": "clicked", "empty": false}        
                   ]},
                   "value": 0.8
                 },
                 "value": 0
+                
               }
+              
+              
+              
             }
           },
           {
             "params": [
               {
                 "name": "Year",
-                "value": [{"Year": 2000}],
+                "value": [{"Year": 2015}],
                 "select": {
                   "type": "point",
                   "fields": ["Year"]
@@ -105,11 +126,37 @@
               {
                 "name": "clicked",
                 "select": {"type": "point", "fields": ["Country"]}
+              },
+              {
+                "name": "filt_legend",
+                "select": {"type": "point", "fields": ["name"],"on":"click"},
+                "bind": "legend"
+              },
+              {
+                "name": "filt_pop",
+                "select": {"type": "point", "fields": ["Population"],"on":"click"},
+                "bind": "legend"
               }
             ],
             "transform": [{"filter": {"param": "Year"}}],
             "mark": {"type": "circle", "size": 100, "opacity": 0.9},
-            "encoding": {"color": {"field": "name", "title": "Region"}}
+            "encoding": {
+              "color": {"field": "name", "title": "Region"},
+              "size":{
+                "field":"Population", 
+                "title":"Population",
+                "scale":{
+                  "type":"threshold",
+                  "domain":[1000000,10000000,50000000,100000000,140000000],
+                  "range":[50,100,150,200,300,400]
+
+                },
+                "legend":{"format":".1s"}
+              }
+            }
+
+            
+
           },
           {
             "transform": [
