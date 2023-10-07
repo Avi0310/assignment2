@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "How GDP affeccts Life Expectancy",
+    "title": "How GDP affects Life Expectancy",
     "data": {"url": "https://raw.githubusercontent.com/Avi0310/homeworkW10/master/Data/cleaned_second_data.csv",
     "format": {
       "type": "csv",
@@ -12,7 +12,7 @@
       }
     }},
     
-    "width": 1200,
+    "width": 1100,
     "height": 500,
     "layer": [
       {
@@ -170,7 +170,7 @@
               "type": "text",
               "align":"center",
               "baseline":"middle",
-              "dx": 0,
+              "dx": -0,
               "fontSize": 12,
               "fontStyle":"italic"
             },
@@ -179,7 +179,7 @@
               "color":{"value":"black"},
               "opacity":{
                 "condition":{
-                  "test":"datum.Country=='Australia' || datum.Country=='Canada' || datum.Country=='France'|| datum.Country=='China' || datum.Country=='United States' || datum.Country=='New Zealand'",
+                  "test":"datum.Country=='Australia' || datum.Country=='Canada' || datum.Country=='France'|| datum.Country=='China' || datum.Country=='United States' ||datum.Country=='Russia' ||datum.Country=='Spain'",
                   "value":1
                 },
                 "value":0
