@@ -17,7 +17,7 @@
     "layer": [
       {
         "transform": [
-          {"filter": {"field": "Country", "equal": "Afghanistan"}},
+          {"filter": {"field": "Country", "equal": "Australia"}},
           {"filter": {"param": "Year"}}
         ],
         "mark": {
@@ -29,6 +29,7 @@
         },
         "encoding": {"text": {"field": "Year"}}
       },
+      
       {
         "transform": [
           {
@@ -68,10 +69,18 @@
           "opacity": {
             "condition": {"param": "filt_legend", "value": 1},
             "value": 0.1
-          }
+          },
+          "tooltip":[
+            {"field": "Country","type": "nominal"},
+            {"field": "Region","type": "nominal"},
+            {"field": "GDP","type": "quantitative", "format":",.3r"},
+            {"field": "life_expectancy","type": "quantitative","title":"Life Expectancy", "format":".2r"},
+            {"field": "Population","type": "quantitative", "format":",.2s"}
+          ]
           
         },
         "layer": [
+          
           {
             "mark": {
               "type": "line",
@@ -99,6 +108,7 @@
               
             }
           },
+          
           {
             "params": [
               {
@@ -131,11 +141,6 @@
                 "name": "filt_legend",
                 "select": {"type": "point", "fields": ["name"],"on":"click"},
                 "bind": "legend"
-              },
-              {
-                "name": "filt_pop",
-                "select": {"type": "point", "fields": ["Population"],"on":"click"},
-                "bind": "legend"
               }
             ],
             "transform": [{"filter": {"param": "Year"}}],
@@ -154,7 +159,32 @@
                 "legend":{"format":".1s"}
               }
             }
+            
 
+            
+
+          },
+          {
+            "transform": [{"filter": {"param": "Year"}}],
+            "mark":{
+              "type": "text",
+              "align":"center",
+              "baseline":"middle",
+              "dx": 0,
+              "fontSize": 12,
+              "fontStyle":"italic"
+            },
+            "encoding": {
+              "text":{"field":"Country", "type":"nominal"},
+              "color":{"value":"black"},
+              "opacity":{
+                "condition":{
+                  "test":"datum.Country=='Australia' || datum.Country=='Canada' || datum.Country=='France'|| datum.Country=='China' || datum.Country=='United States' || datum.Country=='New Zealand'",
+                  "value":1
+                },
+                "value":0
+              }
+            }
             
 
           },
