@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "An interactive scatter plot of global health statistics by Country and Year.",
+    "description": "How GDP affeccts Life Expectancy",
     "data": {"url": "https://raw.githubusercontent.com/Avi0310/homeworkW10/master/Data/cleaned_second_data.csv",
     "format": {
       "type": "csv",

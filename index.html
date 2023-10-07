@@ -13,22 +13,19 @@
 
     <body>  
         <div id="life_expectancy"></div>
-        <script type="text/javascript">
-    
-        var vis = "JS/bubble_chart.vg.json";
-        vegaEmbed('#life_expectancy', vis).then(function(result) 
-        {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-        }).catch(console.error);
-        </script>
+
         <div id="gdp_per_capita"></div>
+
         <script type="text/javascript">
+            var specVis1 = "JS/bubble_chart.vg.json";
+            var specVis2 = "JS/World_GDP_per_Capita.vg.json";
+        
+            vegaEmbed('#life_expectancy', specVis1, { "actions": false });
+        
+            vegaEmbed('#gdp_per_capita', specVis2, { "actions": false }).then(function (result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
     
-        var vis = "JS/World_GDP_per_Capita.vg.json";
-        vegaEmbed('#gdp_per_capita', vis).then(function(result) 
-        {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-        }).catch(console.error);
-        </script>
+          </script>
     </body>
 </html>
