@@ -58,7 +58,7 @@
             "field": "GDP",
             "type": "quantitative",
             "scale": {"domain": [1, 120000]},
-            "axis": {"tickCount": 50, "title": "GDP"}
+            "axis": {"tickCount": 30, "title": "GDP"}
           },
           "y": {
             "field": "life_expectancy",
