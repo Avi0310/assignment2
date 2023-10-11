@@ -34,7 +34,7 @@
     height: 100px; /* Increase the height */
     position: relative; /* Create a relative positioning context */
     margin-right:40px;
-    margin-top: 400px;
+    margin-top: 175px;
 }
 /* Parent container for both graphs */
 #chart-container {
