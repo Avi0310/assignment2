@@ -6,9 +6,8 @@
       "type": "csv",
       "parse": {
         "Year": "number",
-        "life_expectancy": "number",
-        "GDP": "number",
-        "Population": "number"
+        "Age": "number",
+        "GDP": "number"
       }
     }},
     
@@ -61,10 +60,10 @@
             "axis": {"tickCount": 30, "title": "GDP"}
           },
           "y": {
-            "field": "life_expectancy",
+            "field": "Age",
             "type": "quantitative",
             "scale": {"domain": [20, 100]},
-            "axis": {"tickCount": 5, "title": "Life Expectancy"}
+            "axis": {"tickCount": 5, "title": "Age"}
           },
           "opacity": {
             "condition": {"param": "filt_legend", "value": 1},
@@ -74,8 +73,7 @@
             {"field": "Country","type": "nominal"},
             {"field": "Region","type": "nominal"},
             {"field": "GDP","type": "quantitative", "format":",.3r"},
-            {"field": "life_expectancy","type": "quantitative","title":"Life Expectancy", "format":".2r"},
-            {"field": "Population","type": "quantitative", "format":",.2s"}
+            {"field": "Age","type": "quantitative","title":"Life Expectancy", "format":".2r"}
           ]
           
         },
@@ -146,18 +144,8 @@
             "transform": [{"filter": {"param": "Year"}}],
             "mark": {"type": "circle", "size": 100, "opacity": 0.9},
             "encoding": {
-              "color": {"field": "name", "title": "Region"},
-              "size":{
-                "field":"Population", 
-                "title":"Population",
-                "scale":{
-                  "type":"threshold",
-                  "domain":[1000000,10000000,50000000,100000000,140000000],
-                  "range":[50,100,150,200,300,400]
-
-                },
-                "legend":{"format":".1s"}
-              }
+              "color": {"field": "name", "title": "Region"}
+              
             }
             
 
