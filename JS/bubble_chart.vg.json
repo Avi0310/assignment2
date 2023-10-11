@@ -1,226 +1,214 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "How GDP affects Life Expectancy",
-    "data": {"url": "https://raw.githubusercontent.com/Avi0310/homeworkW10/master/Data/cleaned_second_data.csv",
-    "format": {
-      "type": "csv",
-      "parse": {
-        "Year": "number",
-        "Age": "number",
-        "GDP": "number"
-      }
-    }},
-    
-    "width": 1100,
-    "height": 500,
-    "layer": [
-      {
-        "transform": [
-          {"filter": {"field": "Country", "equal": "Australia"}},
-          {"filter": {"param": "Year"}}
-        ],
-        "mark": {
-          "type": "text",
-          "fontSize": 100,
-          "x": 620,
-          "y": 250,
-          "opacity": 0.06
-        },
-        "encoding": {"text": {"field": "Year"}}
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean_data2.csv",
+  "format": {
+    "type": "csv",
+    "parse": {
+      "Year": "number",
+      "Age": "number",
+      "GDP": "number"
+    }
+  }},
+  
+  "width": 700,
+  "height": 300,
+  "layer": [
+    {
+      "transform": [
+        {"filter": {"field": "Country", "equal": "Australia"}},
+        {"filter": {"param": "Year"}}
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 50,
+        "x": 370,
+        "y": 150,
+        "opacity": 0.1
       },
-      
-      {
-        "transform": [
-          {
-            "lookup": "Region",
-            "from": {
-              "key": "id",
-              "fields": ["name"],
-              "data": {
-                "values": [
-                  {"id": "Africa", "name": "Africa"},
-                  {"id": "Arab States", "name": "Arab States"},
-                  {"id": "South/Central America", "name": "South/Central America"},
-                  {"id": "North America", "name": "North America"},
-                  {"id": "Asia & Pacific", "name": "Asia & Pacific"},
-                  {"id": "Middle east", "name": "Middle East"},
-                  {"id": "Europe", "name": "Europe"},
-                  {"id": "South/Latin America", "name": "South/Latin America"},
-                  {"id": "#N/A", "name": "Africa"}
+      "encoding": {"text": {"field": "Year"}}
+    },
+    
+    {
+      "transform": [
+        {
+          "lookup": "Region",
+          "from": {
+            "key": "id",
+            "fields": ["name"],
+            "data": {
+              "values": [
+                {"id": "Africa", "name": "Africa"},
+                {"id": "Arab States", "name": "Arab States"},
+                {"id": "South/Central America", "name": "South/Central America"},
+                {"id": "North America", "name": "North America"},
+                {"id": "Asia & Pacific", "name": "Asia & Pacific"},
+                {"id": "Middle east", "name": "Middle East"},
+                {"id": "Europe", "name": "Europe"},
+                {"id": "South/Latin America", "name": "South/Latin America"},
+                {"id": "#N/A", "name": "Africa"}
+              ]
+            }
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "GDP",
+          "type": "quantitative",
+          "scale": {"domain": [1, 120000]},
+          "axis": {"tickCount": 30, "title": "GDP"}
+        },
+        "y": {
+          "field": "Age",
+          "type": "quantitative",
+          "scale": {"domain": [10, 90]},
+          "axis": {"tickCount": 5, "title": "Age"}
+        },
+        "opacity": {
+          "condition": {"param": "filt_legend", "value": 1},
+          "value": 0.1
+        },
+        "tooltip":[
+          {"field": "Country","type": "nominal"},
+          {"field": "Region","type": "nominal"},
+          {"field": "GDP","type": "quantitative", "format":",.3r"},
+          {"field": "Age","type": "quantitative","title":"Life Expectancy", "format":".2r"}
+        ]
+        
+      },
+      "layer": [
+        
+        {
+          "mark": {
+            "type": "line",
+            "size": 4,
+            "color": "lightgray",
+            "strokeCap": "round"
+          },
+          "encoding": {
+            "detail": {"field": "Country"},
+            "order": {"field": "Year"},
+            "opacity": {
+              "condition": {
+                
+                "test": {"or": [
+                  {"param": "hovered", "empty": false},
+                  {"param": "clicked", "empty": false}        
+                ]},
+                "value": 0.8
+              },
+              "value": 0
+              
+            }
+            
+            
+            
+          }
+        },
+        
+        {
+          "params": [
+            {
+              "name": "Year",
+              "value": [{"Year": 2021}],
+              "select": {
+                "type": "point",
+                "fields": ["Year"]
+              },
+              "bind": {
+                "name": "Year",
+                "input": "range",
+                "min": 1990, "max": 2021, "step": 1
+              }
+            },
+            {
+              "name": "hovered",
+              "select": {
+                "type": "point",
+                "fields": ["Country"],
+                "toggle": false,
+                "on": "mouseover"
+              }
+            },
+            {
+              "name": "clicked",
+              "select": {"type": "point", "fields": ["Country"]}
+            },
+            {
+              "name": "filt_legend",
+              "select": {"type": "point", "fields": ["name"],"on":"click"},
+              "bind": "legend"
+            }
+          ],
+          "transform": [{"filter": {"param": "Year"}}],
+          "mark": {"type": "circle", "size": 100, "opacity": 0.9},
+          "encoding": {
+            "color": {"field": "name", "title": "Region"}
+            
+          }
+          
+
+          
+
+        },
+        {
+          "transform": [{"filter": {"param": "Year"}}],
+          "mark":{
+            "type": "text",
+            "align":"center",
+            "baseline":"middle",
+            "dx": -0,
+            "fontSize": 12,
+            "fontStyle":"italic"
+          }
+          
+          
+
+        },
+        {
+          "transform": [
+            {
+              "filter": {
+                "and": [
+                  {"param": "Year"},
+                  {"or": [
+                    {"param": "clicked", "empty": false},
+                    {"param": "hovered", "empty": false}
+                  ]}
                 ]
               }
             }
+          ],
+          "mark": {
+            "type": "text",
+            "yOffset": -12,
+            "fontSize": 12,
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "text": {"field": "Country"},
+            "color": {"field": "name", "title": "Region"}
           }
-        ],
-        "encoding": {
-          "x": {
-            "field": "GDP",
-            "type": "quantitative",
-            "scale": {"domain": [1, 120000]},
-            "axis": {"tickCount": 30, "title": "GDP"}
-          },
-          "y": {
-            "field": "Age",
-            "type": "quantitative",
-            "scale": {"domain": [20, 100]},
-            "axis": {"tickCount": 5, "title": "Age"}
-          },
-          "opacity": {
-            "condition": {"param": "filt_legend", "value": 1},
-            "value": 0.1
-          },
-          "tooltip":[
-            {"field": "Country","type": "nominal"},
-            {"field": "Region","type": "nominal"},
-            {"field": "GDP","type": "quantitative", "format":",.3r"},
-            {"field": "Age","type": "quantitative","title":"Life Expectancy", "format":".2r"}
-          ]
-          
         },
-        "layer": [
-          
-          {
-            "mark": {
-              "type": "line",
-              "size": 4,
-              "color": "lightgray",
-              "strokeCap": "round"
-            },
-            "encoding": {
-              "detail": {"field": "Country"},
-              "order": {"field": "Year"},
-              "opacity": {
-                "condition": {
-                  
-                  "test": {"or": [
-                    {"param": "hovered", "empty": false},
-                    {"param": "clicked", "empty": false}        
-                  ]},
-                  "value": 0.8
-                },
-                "value": 0
-                
+        {
+          "transform": [
+            {"filter": {"param": "hovered", "empty": false}},
+            {"filter": {"not": {"param": "Year"}}}
+          ],
+          "layer": [
+            {
+              "mark": {
+                "type": "text",
+                "yOffset": -12,
+                "fontSize": 12,
+                "color": "gray"
               }
-              
-              
-              
-            }
-          },
-          
-          {
-            "params": [
-              {
-                "name": "Year",
-                "value": [{"Year": 2015}],
-                "select": {
-                  "type": "point",
-                  "fields": ["Year"]
-                },
-                "bind": {
-                  "name": "Year",
-                  "input": "range",
-                  "min": 2000, "max": 2015, "step": 1
-                }
-              },
-              {
-                "name": "hovered",
-                "select": {
-                  "type": "point",
-                  "fields": ["Country"],
-                  "toggle": false,
-                  "on": "mouseover"
-                }
-              },
-              {
-                "name": "clicked",
-                "select": {"type": "point", "fields": ["Country"]}
-              },
-              {
-                "name": "filt_legend",
-                "select": {"type": "point", "fields": ["name"],"on":"click"},
-                "bind": "legend"
-              }
-            ],
-            "transform": [{"filter": {"param": "Year"}}],
-            "mark": {"type": "circle", "size": 100, "opacity": 0.9},
-            "encoding": {
-              "color": {"field": "name", "title": "Region"}
               
             }
             
-
-            
-
-          },
-          {
-            "transform": [{"filter": {"param": "Year"}}],
-            "mark":{
-              "type": "text",
-              "align":"center",
-              "baseline":"middle",
-              "dx": -0,
-              "fontSize": 12,
-              "fontStyle":"italic"
-            },
-            "encoding": {
-              "text":{"field":"Country", "type":"nominal"},
-              "color":{"value":"black"},
-              "opacity":{
-                "condition":{
-                  "test":"datum.Country=='Australia' || datum.Country=='Canada' || datum.Country=='France'|| datum.Country=='China' || datum.Country=='United States' ||datum.Country=='Russia' ||datum.Country=='Spain'",
-                  "value":1
-                },
-                "value":0
-              }
-            }
-            
-
-          },
-          {
-            "transform": [
-              {
-                "filter": {
-                  "and": [
-                    {"param": "Year"},
-                    {"or": [
-                      {"param": "clicked", "empty": false},
-                      {"param": "hovered", "empty": false}
-                    ]}
-                  ]
-                }
-              }
-            ],
-            "mark": {
-              "type": "text",
-              "yOffset": -12,
-              "fontSize": 12,
-              "fontWeight": "bold"
-            },
-            "encoding": {
-              "text": {"field": "Country"},
-              "color": {"field": "name", "title": "Region"}
-            }
-          },
-          {
-            "transform": [
-              {"filter": {"param": "hovered", "empty": false}},
-              {"filter": {"not": {"param": "Year"}}}
-            ],
-            "layer": [
-              {
-                "mark": {
-                  "type": "text",
-                  "yOffset": -12,
-                  "fontSize": 12,
-                  "color": "gray"
-                },
-                "encoding": {"text": {"field": "Year"}}
-              },
-              {"mark": {"type": "circle", "color": "gray"}}
-            ]
-          }
-        ]
-      }
-    ]
-  }
-  
+          ]
+        }
+      ]
+    }
+  ]
+}

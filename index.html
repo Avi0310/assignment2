@@ -1,31 +1,46 @@
 <!DOCTYPE html>
-
 <html>
-    
-    <head>
+<head>
     <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
     <!-- CSS file -->
     <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
-    </head>
+    <title>World GDP</title>
+</head>
+<body>
+  
+    <div id="chart-container">
+      <div id="page-title">
+        <div class="map-container3"> World GDP</div>
+        <div class="map-container4"> How GDP across the world affects the place we live in and our daily lives</div>
+    </div>
+      
+        <div id="gdp_per_capita">
+            <div class="container-title">World GDP Per Capita</div>
+            <div class="title-line"></div>
+            <div class="map-container" id="gdp_per_capita_map"></div>
+            <div class="map-container5" >This Choropleth map shows how the GDP varies across different countries in the world. The countries for which data is unavailable are marked out as grey. Hover over each country to get a more detailed view about them.</div>
+        </div>
+        <div id="life_expectancy">
+          <div class="container-title">How GDP affects life expectancy</div>
+          <div class="title-line"></div>
+            <div class="map-container2" id="life_expectancy_map"></div>
+            <div class="map-container6" >This bubble chart demonstrates the relationship between between GDP and Life expectancyfor all countries across the world. It can be seen that African countries have a lower life expectancy and GDP compared to other regions. Luxembourg has the highest GDP while Switwerland and Japan have the highest life expectancy in 2021. Scroll the slider to view how the data changes from 1990 to 2021. Clicking on a country will show it's path and highlight that country. Choosing a region from the legend while spotlight the countries from these regions on the bubble chart.
+              .</div>
+        </div>
+    </div>
 
-    <body>  
-        <div id="life_expectancy"></div>
-
-        <div id="gdp_per_capita"></div>
-
-        <script type="text/javascript">
-            var specVis1 = "JS/bubble_chart.vg.json";
-            var specVis2 = "JS/World_GDP_per_Capita.vg.json";
-        
-            vegaEmbed('#life_expectancy', specVis1, { "actions": false });
-        
-            vegaEmbed('#gdp_per_capita', specVis2, { "actions": false }).then(function (result) {
-              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-            }).catch(console.error);
+    <script type="text/javascript">
+        var specVis1 = "JS/bubble_chart.vg.json";
+        var specVis2 = "JS/World_GDP_per_Capita.vg.json";
     
-          </script>
-    </body>
+        vegaEmbed('#life_expectancy_map', specVis1, { "actions": false });
+    
+        vegaEmbed('#gdp_per_capita_map', specVis2, { "actions": false }).then(function (result) {
+            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+    </script>
+</body>
 </html>
