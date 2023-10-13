@@ -10,10 +10,29 @@
         "strokeWidth": 1
       },
       "data": {
-        "url": "data/us-10m.json",
-        "format": {"type": "topojson", "feature": "states"}
+        "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/ne_110m%20(3).json",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       }
+      
     },
+    {
+      "data":
+      {
+        "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/oceans.topojson",
+        "format": {"type": "topojson", "feature": "oceans"}
+      },
+      "mark": { "type": "geoshape", "fill": "#c8e2f8" }
+    },
+    {
+      "data": 
+      {
+        "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/ne_110m%20(3).json",
+        "format": { "type": "topojson", "feature": "ne_110m_graticules_30" }
+      },
+      "mark": { "type": "geoshape", "fill": null, "stroke": "gray" }
+    },
+
+
     {
       "mark": {"type": "rule", "color": "#000", "opacity": 0.35},
       "data": {"url": "data/flights-airport.csv"},
@@ -84,7 +103,7 @@
       }
     }
   ],
-  "projection": {"type": "albersUsa"},
-  "width": 900,
+  "projection": {"type": "equalEarth"},
+  "width": 700,
   "height": 500
 }
