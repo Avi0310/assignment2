@@ -29,7 +29,7 @@ with open('data/migration-flows.csv', 'r') as file_content, open("data/clean-mig
             i+=1
 
         t=0
-        if my_list2[0] != 'Year':
+        if my_list2[0] == '2020':
             out=0
             for j in output_index:
                 if(my_list2[j]!= ''):
