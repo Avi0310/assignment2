@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bump chart",
+  "height": 240,
+  "width": 400,
+  "encoding": {
+    "x": {"field": "year", "type": "ordinal","scale":{"domain":[1990,2021]}},
+    "y": {
+      "field": "GDP_per_capita_USD",
+      "type": "quantitative"
+    },
+    "color": {"field": "Country", "type": "nominal"},
+    "time": {
+      "field": "year",
+      "scale": {"type": "band", "range": {"step": 800}},
+      "key": {"field": "Country"}
+    }
+  },
+  "mark": {"type": "line", "interpolate": "cardinal", "point": true},
+  "params": [
+    {
+      "name": "anim_sel",
+      "select": {
+        "type": "point",
+        "on": "timer",
+        "predicate": {"field": "year", "lte": {"expr": "anim_value"}}
+      }
+    }
+  ],
+  "transform": [
+    {"calculate": "toNumber(datum.year)", "as": "year"},
+    {"calculate": "toNumber(datum.GDP_per_capita_USD)", "as": "GDP_per_capita_USD"},
+    {"filter": {"param": "anim_sel"}}
+  ],
+  "data": {"url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/world_country_gdp_usd.csv"}
+}
