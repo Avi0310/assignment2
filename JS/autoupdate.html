@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto-Updating Line Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+    <h1>Auto-Updating Line Chart</h1>
+    
+    <div id="visualization-container"></div>
+
+    <script>
+        // Function to generate random data for the line chart
+        function generateData() {
+            const years = Array.from({ length: 10 }, (_, i) => 2010 + i);
+            const values = years.map(() => Math.random() * 100);
+            return years.map((year, index) => ({ year, value: values[index] }));
+        }
+
+        // Function to update the line chart
+        function updateLineChart() {
+            const data = generateData();
+
+            const vegaLiteSpec = {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": { "values": data },
+                "mark": "line",
+                "encoding": {
+                    "x": { "field": "year", "type": "quantitative" },
+                    "y": { "field": "value", "type": "quantitative" }
+                }
+            };
+
+            vegaEmbed("#visualization-container", vegaLiteSpec, { actions: false }).then((result) => {
+                // Visualization displayed
+            }).catch((error) => {
+                console.error("Error displaying visualization: ", error);
+            });
+        }
+
+        // Initial update of the line chart
+        updateLineChart();
+
+        // Set an interval to update the chart every 3 seconds
+        setInterval(updateLineChart, 1000);
+    </script>
+</body>
+</html>

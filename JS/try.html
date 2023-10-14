@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vega-Lite Visualization Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+</head>
+<body>
+    <h1>Vega-Lite Visualizations</h1>
+    <div>
+    
+    <button id="button1">World</button>
+    <button id="button2">Region</button>
+    </div>
+    
+    <div id="visualization-container"></div>
+
+    <script>
+        // Function to display Vega-Lite visualization
+        displayVisualization("nodeMapWorld.vg.json")
+        function displayVisualization(spec) {
+            vegaEmbed("#visualization-container", spec, { actions: false }).then((result) => {
+                // Visualization displayed
+            }).catch((error) => {
+                console.error("Error displaying visualization: ", error);
+            });
+        }
+
+        document.getElementById("button1").addEventListener("click", function() {
+            // Load and display Visualization 1 from an external .vg.json file
+            spec = "nodeMapWorld.vg.json";
+            displayVisualization(spec)
+        });
+
+        document.getElementById("button2").addEventListener("click", function() {
+            // Load and display Visualization 2 from an external .vg.json file
+            spec = "nodeMapByRegion.vg.json";
+            displayVisualization(spec)
+        });
+    </script>
+</body>
+</html>

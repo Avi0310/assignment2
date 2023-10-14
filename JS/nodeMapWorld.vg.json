@@ -1,6 +1,18 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "An interactive visualization of connections among major U.S. airports in 2008. Based on a U.S. airports example by Mike Bostock.",
+  "description": "An interactive visualization of connections among major U.S. airports in 2008.",
+  "params": [
+    {
+      "name": "zoom_level",
+      "value": 180,
+      "on": [
+        {
+          "events": { "type": "wheel", "consume": true },
+          "update": "clamp(zoom_level * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 1000)"
+        }
+      ]
+    }
+  ],
   "layer": [
     {
       "mark": {
@@ -11,34 +23,32 @@
       },
       "data": {
         "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/ne_110m%20(3).json",
-        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+        "format": { "type": "topojson", "feature": "ne_110m_admin_0_countries" }
       }
     },
     {
-      "data":
-      {
+      "data": {
         "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/oceans.topojson",
-        "format": {"type": "topojson", "feature": "oceans"}
+        "format": { "type": "topojson", "feature": "oceans" }
       },
       "mark": { "type": "geoshape", "fill": "#c8e2f8" }
     },
     {
-      "data":
-      {
+      "data": {
         "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/ne_110m%20(3).json",
         "format": { "type": "topojson", "feature": "ne_110m_graticules_30" }
       },
       "mark": { "type": "geoshape", "fill": null, "stroke": "gray" }
     },
     {
-      "mark": { "type": "rule", "color": "#000", "opacity": 0.1 },
-      "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
+      "mark": { "type": "rule", "color": "#000", "opacity": 0.05 },
+      "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-emigrants-data.csv" },
       "transform": [
         { "filter": { "param": "org", "empty": false } },
         {
           "lookup": "Origin",
           "from": {
-            "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
+            "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-emigrants-data.csv" },
             "key": "Origin",
             "fields": ["LatOrigin", "LongOrigin"]
           }
@@ -46,7 +56,7 @@
         {
           "lookup": "Destination",
           "from": {
-            "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
+            "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-emigrants-data.csv" },
             "key": "Destination",
             "fields": ["LatDest", "LongDest"]
           },
@@ -61,16 +71,16 @@
       }
     },
     {
-      "mark": { "type": "circle" },
-      "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
+      "mark": { "type": "circle", "color": "green" },
+      "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-emigrants-data.csv" },
       "transform": [
-        { "aggregate": [{ "op": "sum", "field": "Number", "as": "TotalNumber" }], "groupby": ["Origin"] },
+        { "aggregate": [{ "op": "sum", "field": "Number", "as": "TotalNumber" }], "groupby": ["Destination"] },
         {
-          "lookup": "Origin",
+          "lookup": "Destination",
           "from": {
-            "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
+            "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-emigrants-data.csv" },
             "key": "Origin",
-            "fields": ["Destination", "LongOrigin", "LatOrigin"]
+            "fields": ["Origin", "LongOrigin", "LatOrigin"]
           }
         },
         { "filter": "datum.LatOrigin !== '#N/A' && datum.LongOrigin !== '#N/A'" },
@@ -94,13 +104,22 @@
         "size": {
           "field": "parsedNumber",
           "type": "quantitative",
-          "scale": { "rangeMax": 100 }
+          "scale": { "rangeMax": 1000 }
         },
+        "tooltip": [
+          { "field": "Origin", "type": "nominal", "title": "Country" },
+          { "field": "parsedNumber", "type": "quantitative", "title": "Number of Immigrants" }
+        ],
         "order": { "field": "parsedNumber", "sort": "ascending" }
       }
     }
   ],
-  "projection": { "type": "equalEarth" },
-  "width": 700,
-  "height": 500
+  "projection": {
+    "type": "equalEarth",
+    "scale": {
+     "expr": "zoom_level"
+    }
+  },
+  "width": 1000,
+  "height": 600
 }
