@@ -13,7 +13,6 @@
         "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/ne_110m%20(3).json",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       }
-      
     },
     {
       "data":
@@ -24,86 +23,84 @@
       "mark": { "type": "geoshape", "fill": "#c8e2f8" }
     },
     {
-      "data": 
+      "data":
       {
         "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/ne_110m%20(3).json",
         "format": { "type": "topojson", "feature": "ne_110m_graticules_30" }
       },
       "mark": { "type": "geoshape", "fill": null, "stroke": "gray" }
     },
-
-
     {
-      "mark": {"type": "rule", "color": "#000", "opacity": 0.35},
-      "data": {"url": "data/flights-airport.csv"},
+      "mark": { "type": "rule", "color": "#000", "opacity": 0.1 },
+      "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
       "transform": [
-        {"filter": {"param": "org", "empty": false}},
+        { "filter": { "param": "org", "empty": false } },
         {
-          "lookup": "origin",
+          "lookup": "Origin",
           "from": {
-            "data": {"url": "data/airports.csv"},
-            "key": "iata",
-            "fields": ["latitude", "longitude"]
+            "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
+            "key": "Origin",
+            "fields": ["LatOrigin", "LongOrigin"]
           }
         },
         {
-          "lookup": "destination",
+          "lookup": "Destination",
           "from": {
-            "data": {"url": "data/airports.csv"},
-            "key": "iata",
-            "fields": ["latitude", "longitude"]
+            "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
+            "key": "Destination",
+            "fields": ["LatDest", "LongDest"]
           },
           "as": ["lat2", "lon2"]
         }
       ],
       "encoding": {
-        "latitude": {"field": "latitude"},
-        "longitude": {"field": "longitude"},
-        "latitude2": {"field": "lat2"},
-        "longitude2": {"field": "lon2"}
+        "latitude": { "field": "LatOrigin" },
+        "longitude": { "field": "LongOrigin" },
+        "latitude2": { "field": "lat2" },
+        "longitude2": { "field": "lon2" }
       }
     },
     {
-      "mark": {"type": "circle"},
-      "data": {"url": "data/flights-airport.csv"},
+      "mark": { "type": "circle" },
+      "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
       "transform": [
-        {"aggregate": [{"op": "count", "as": "routes"}], "groupby": ["origin"]},
+        { "aggregate": [{ "op": "sum", "field": "Number", "as": "TotalNumber" }], "groupby": ["Origin"] },
         {
-          "lookup": "origin",
+          "lookup": "Origin",
           "from": {
-            "data": {"url": "data/airports.csv"},
-            "key": "iata",
-            "fields": ["state", "latitude", "longitude"]
+            "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-migration-data.csv" },
+            "key": "Origin",
+            "fields": ["Destination", "LongOrigin", "LatOrigin"]
           }
         },
-        {"filter": "datum.state !== 'PR' && datum.state !== 'VI'"}
+        { "filter": "datum.LatOrigin !== '#N/A' && datum.LongOrigin !== '#N/A'" },
+        { "calculate": "toNumber(datum.TotalNumber)", "as": "parsedNumber" }
       ],
-      "params": [{
-        "name": "org",
-        "select": {
-          "type": "point",
-          "on": "mouseover",
-          "nearest": true,
-          "fields": ["origin"]
+      "params": [
+        {
+          "name": "org",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "nearest": true,
+            "fields": ["Origin"],
+            "clear": "mouseout"
+          }
         }
-      }],
+      ],
       "encoding": {
-        "latitude": {"field": "latitude"},
-        "longitude": {"field": "longitude"},
+        "latitude": { "field": "LatOrigin" },
+        "longitude": { "field": "LongOrigin" },
         "size": {
-          "field": "routes",
+          "field": "parsedNumber",
           "type": "quantitative",
-          "scale": {"rangeMax": 1000},
-          "legend": null
+          "scale": { "rangeMax": 100 }
         },
-        "order": {
-          "field": "routes",
-          "sort": "descending"
-        }
+        "order": { "field": "parsedNumber", "sort": "ascending" }
       }
     }
   ],
-  "projection": {"type": "equalEarth"},
+  "projection": { "type": "equalEarth" },
   "width": 700,
   "height": 500
 }

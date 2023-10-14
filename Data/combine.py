@@ -2,7 +2,7 @@
 life_expectancy_dict = {}
 
 # Read life expectancy data into the dictionary
-with open('data/migration-flows.csv', 'r') as file_content, open("data/clean-migration-data.csv", "w") as output_file:
+with open('data/migration-flows.csv', 'r') as file_content, open("data/clean-emigrants-data.csv", "w") as output_file:
     i=0
     output_index = []
     countries_list=[]
@@ -12,11 +12,11 @@ with open('data/migration-flows.csv', 'r') as file_content, open("data/clean-mig
         my_list2 = line2.split(",")
         while i < 1:
             for x in range(len(my_list2)):
-                if my_list2[x].__contains__("Immigrants"):
+                if my_list2[x].__contains__("Emigrants"):
                     output_index.append(x)
             
             for y in output_index:
-                countries_list.append(my_list2[y].replace('Immigrants to ',''))
+                countries_list.append(my_list2[y].replace('Emigrants from ',''))
             """ out=''
             for g in range(len(countries_list)):
                 if g == len(countries_list)-1:
