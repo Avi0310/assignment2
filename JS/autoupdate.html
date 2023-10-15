@@ -17,6 +17,7 @@
         function generateData() {
             const years = Array.from({ length: 10 }, (_, i) => 2010 + i);
             const values = years.map(() => Math.random() * 100);
+        
             return years.map((year, index) => ({ year, value: values[index] }));
         }
 
@@ -30,7 +31,8 @@
                 "mark": "line",
                 "encoding": {
                     "x": { "field": "year", "type": "quantitative" },
-                    "y": { "field": "value", "type": "quantitative" }
+                    "y": { "field": "value", "type": "quantitative" },
+
                 }
             };
 
