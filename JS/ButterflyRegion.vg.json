@@ -1,0 +1,90 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+  "description": "A population pyramid for the US in 2000.",
+  "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/GDPHappinessdata.csv",
+  "format": {
+    "type": "csv",
+    "parse": {
+      "Year": "number",
+      "Average GDP": "number",
+      "Average Happiness Index": "number"
+      }
+    }},
+    "params": [
+        {
+      "name": "continent",
+      "value": "Oceania",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Europe",
+          "Africa",
+          "Asia",
+          "North America",
+          "South America",
+          "Oceania"
+        ],
+        "name": "Continent: "
+      }
+    }
+    ],
+  "transform": [
+    {"filter": "datum.Continents == continent"}
+  ],
+  "spacing": 10,
+  "hconcat": [{
+    
+    "title": "GDP",
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "field": "Year", "type": "ordinal",
+        "axis": null
+      },
+      "x": {
+        "field": "Average GDP", "type": "quantitative",
+        "axis": {"title": "Average GDP", "format": "s","scale":{"domain":[0,60000]}},
+        "sort": "descending"
+      },
+      "color": {
+        "field": "Continents", "type": "nominal","legend":null
+      }
+    }
+    
+  }, 
+ 
+  {
+    "width": 20,
+    "view": {"stroke": null},
+    "mark": {
+      "type": "text",
+      "align": "center"
+    },
+    "encoding": {
+      "y": {"field": "Year", "type": "ordinal", "axis": null},
+      "text": {"field": "Year", "type": "ordinal"}
+    }
+  }, {
+    
+    "title": "Average Happiness Index",
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "field": "Year", "type": "ordinal", "title": null,
+        "axis": null
+      },
+      "x": {
+        "field": "Average Happiness Index", "type": "quantitative",
+        "axis": {"scale":{"domain":[0,10]},"title": "Average Happiness Index", "format": "s"}
+      },
+      "color": {
+        "field": "Continents", "type": "nominal"
+      }
+    }
+  }],
+
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"grid": false}
+  }
+}

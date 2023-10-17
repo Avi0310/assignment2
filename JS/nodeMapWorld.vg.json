@@ -4,7 +4,7 @@
   "params": [
     {
       "name": "zoom_level",
-      "value": 180,
+      "value": 150,
       "on": [
         {
           "events": { "type": "wheel", "consume": true },
@@ -108,7 +108,7 @@
         },
         "tooltip": [
           { "field": "Origin", "type": "nominal", "title": "Country" },
-          { "field": "parsedNumber", "type": "quantitative", "title": "Number of Immigrants" }
+          { "field": "parsedNumber", "type": "quantitative", "title": "Number of Immigrants","format":".3s" }
         ],
         "order": { "field": "parsedNumber", "sort": "ascending" }
       }
@@ -120,6 +120,7 @@
      "expr": "zoom_level"
     }
   },
-  "width": 1000,
-  "height": 600
+  "width": 850,
+  "height": 600,
+  "config": {"style": {"cell": {"stroke": "transparent"}}}
 }

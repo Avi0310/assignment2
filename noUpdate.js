@@ -2,12 +2,11 @@
 var vlSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     data: { name: 'table' },
-    width: 800,
-    heigh:300,
+    width: 700,
     mark: {type:'line',strokeWidth:3},
     encoding: {
-      x: { field: 'year', type: 'quantitative',title:"Year", scale: { zero: false } ,axis:{format:'d',"grid":false}},
-      y: { field: 'GDP_per_capita_USD', type: 'quantitative',title:"GDP per Capita" },
+      x: { field: 'year', type: 'quantitative', scale: { zero: false } ,axis:{format:'d',"grid":false}},
+      y: { field: 'GDP_per_capita_USD', type: 'quantitative' },
       color: { field: 'Country', type: 'nominal',scale:{range:['#66c2a5',
         '#fc8d62',
         '#444e86',
@@ -20,14 +19,12 @@ var vlSpec = {
         { field: 'Country', type: 'nominal', title: 'Country' }
       ],
       shape:{}
-      }
-      ,
-      config: {padding: 50}
+    }
   };
   
   document.addEventListener('DOMContentLoaded', function () {
     
-    vegaEmbed('#chart', vlSpec,).then(function (res) {
+    vegaEmbed('#chart', vlSpec).then(function (res) {
         var data = [
             { 
                 Country: 'Australia', 
@@ -1029,7 +1026,7 @@ var vlSpec = {
 
 
       var update = true;
-      document.getElementById("toggle").onclick=function(){
+      document.getElementById("updateOrNot").onclick=function(){
         update = !update;
         if(update){
             res.view.remove('table', (d) => true).runAsync().then(function () {
@@ -1038,10 +1035,12 @@ var vlSpec = {
                 setTimeout(updateChart, 500);
                 dataIndex = 0;
               });
+            this.innerText = 'Show Static Line Chart';
         }
         else{
             
             noUpdate();
+            this.innerText = 'Line Chart Race';
         }
       }
     });

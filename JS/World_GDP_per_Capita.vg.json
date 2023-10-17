@@ -1,8 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 700,
-  "height": 500,
+  "width": 900,
+  "height": 450,
+  "title": {"text":"GDP per Capita of Countries","font":"Sans-Serif"},
   "projection": {"type": "equalEarth"},
   "config": {"view": {"stroke": null}},
   "data": {
@@ -61,14 +62,16 @@
           "title":"GDP per Capita",
           "scale": 
           {
-            "type": "log"
+            "type": "threshold",
+            "domain": [5000,10000,25000,50000, 100000],
+            "scheme":"yelloworangered"
             
-          } 
+          }
         },
         "tooltip": 
         [
           {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-          {"field": "GDP per capita, PPP (constant 2017 international $)", "type": "quantitative", "title": "GDP"}
+          {"field": "GDP per capita, PPP (constant 2017 international $)","format":".4r", "type": "quantitative", "title": "GDP"}
         ]
       }
     }

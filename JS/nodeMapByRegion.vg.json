@@ -140,6 +140,7 @@
      "expr": "zoom_level"
     }
   },
-  "width": 1000,
-  "height": 600
+  "width": 850,
+  "height": 600,
+  "config": {"style": {"cell": {"stroke": "transparent"}}}
 }

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A dual axis chart, created by setting y's scale resolution to `\"independent\"`",
+  "width": 350, "height": 200,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/GDPHappinessdata.csv"
+  },
+  "params": [
+        {
+      "name": "Continent",
+      "value": "Oceania",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Europe",
+          "Africa",
+          "Asia",
+          "North America",
+          "South America",
+          "Oceania"
+        ],
+        "name": "Continent: "
+      }
+    }
+    ],
+  "transform": [{"filter": "datum.Continents == Continent"}],
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type":"ordinal",
+      "axis": {"title": "Year","grid": true}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"stroke": "#85C5A6", "type": "line","strokeWidth":3},
+      "encoding": {
+        "y": {
+          "field": "Average GDP",
+          "title": "Average GDP",
+          "axis": {"titleColor":"#85C5A6", "format": ".3s"},"sort":"descending"
+        }
+      }
+    },
+    {
+      "mark": {"stroke": "#85A9C5", "type": "line","strokeWidth":3},
+      "encoding": {
+        "y": {
+          "field": "Average Happiness Index",
+          "title": "Average Happiness Index",
+          "axis": {"titleColor":"#85A9C5", "format":".3s"},"sort":"descending"
+        }
+      }
+    }
+  ],
+  "resolve": {"scale": {"y": "independent"}}
+}

@@ -10,7 +10,7 @@
     }
   }},
   
-  "width": 700,
+  "width": 820,
   "height": 300,
   "layer": [
     {
@@ -21,9 +21,9 @@
       "mark": {
         "type": "text",
         "fontSize": 150,
-        "x": 370,
-        "y": 150,
-        "opacity": 0.1
+        "x": 470,
+        "y": 145,
+        "opacity": 0.2
       },
       "encoding": {"text": {"field": "Year"}}
     },
@@ -62,7 +62,7 @@
           "field": "Age",
           "type": "quantitative",
           "scale": {"domain": [10, 90]},
-          "axis": {"tickCount": 5, "title": "Age"}
+          "axis": {"tickCount": 5, "title": "Life Expectancy"}
         },
         "opacity": {
           "condition": {"param": "filt_legend", "value": 1},
@@ -118,7 +118,8 @@
               "bind": {
                 "name": "Year",
                 "input": "range",
-                "min": 1990, "max": 2021, "step": 1
+                "min": 1990, "max": 2021, "step": 1,
+                "config":{}
               }
             },
             {
