@@ -33,24 +33,37 @@
   },
   "layer": [
     {
-      "mark": {"stroke": "#85C5A6", "type": "line","strokeWidth":3},
+      "mark": {"stroke": "#85C5A6", "type": "line","strokeWidth":3,"point":true},
       "encoding": {
         "y": {
           "field": "Average GDP",
           "title": "Average GDP",
           "axis": {"titleColor":"#85C5A6", "format": ".3s"},"sort":"descending"
-        }
+        },
+      
+        "tooltip":[
+          {"field":"Year","type":"ordinal", "title": "Year"},
+          {"field":"Average GDP","type":"quantitative", "format": ".3s"},
+          {"field":"Average Happiness Index","type":"quantitative","format": ".3s"}
+        ]
       }
     },
     {
-      "mark": {"stroke": "#85A9C5", "type": "line","strokeWidth":3},
+      "mark": {"stroke": "#85A9C5", "type": "line","strokeWidth":3,"point":true},
       "encoding": {
         "y": {
           "field": "Average Happiness Index",
           "title": "Average Happiness Index",
           "axis": {"titleColor":"#85A9C5", "format":".3s"},"sort":"descending"
-        }
+        },
+      
+        "tooltip":[
+          {"field":"Year","type":"ordinal", "title": "Year"},
+          {"field":"Average GDP","type":"quantitative", "format": ".3s"},
+          {"field":"Average Happiness Index","type":"quantitative","format": ".3s"}
+        ]
       }
+      
     }
   ],
   "resolve": {"scale": {"y": "independent"}}

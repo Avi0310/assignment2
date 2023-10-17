@@ -43,7 +43,12 @@
       },
       "color": {
         "field": "Continents", "type": "nominal","legend": null
-      }
+      },
+      "tooltip":[
+        {"field":"Year","type":"ordinal", "title": "Year"},
+        {"field":"Average GDP","type":"quantitative", "format": ".3s"},
+        {"field":"Average Happiness Index","type":"quantitative","format": ".3s"}
+      ]
     }
     
   }, 
@@ -74,8 +79,18 @@
         "scale": {"domain": [0, 9]}
       },
       "color": {
-        "field": "Continents", "type": "nominal"
-      }
+        "field": "Continents", "type": "nominal","scale":{"range":["#66c2a5","#fc8d62",
+        "#444e86",
+        "#e78ac3",
+        "#00d9e9",
+        "#ffa600"]}
+      },
+      
+      "tooltip":[
+        {"field":"Year","type":"ordinal", "title": "Year"},
+        {"field":"Average GDP","type":"quantitative", "format": ".3s"},
+        {"field":"Average Happiness Index","type":"quantitative","format": ".3s"}
+      ]
     }
   }],
 

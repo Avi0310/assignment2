@@ -101,6 +101,7 @@
             "fields": ["Origin", "LongOrigin", "LatOrigin"]
           }
         },
+        
         { "filter": "datum.LatOrigin !== '#N/A' && datum.LongOrigin !== '#N/A'" },
         { "calculate": "toNumber(datum.TotalNumber)", "as": "parsedNumber" }
       ],

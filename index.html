@@ -1,46 +1,239 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-    <!-- CSS file -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
-    <title>World GDP</title>
-</head>
-<body>
-  
-    <div id="chart-container">
-      <div id="page-title">
-        <div class="map-container3"> World GDP</div>
-        <div class="map-container4"> How GDP across the world affects the place we live in and our daily lives</div>
-    </div>
-      
-        <div id="gdp_per_capita">
-            <div class="container-title">World GDP Per Capita</div>
-            <div class="title-line"></div>
-            <div class="map-container" id="gdp_per_capita_map"></div>
-            <div class="map-container5" >This Choropleth map shows how the GDP varies across different countries in the world. The countries for which data is unavailable are marked out as grey. Hover over each country to get a more detailed view about them.</div>
+    <head>
+        <title>Multiple Visualisations | An Example</title>
+        <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+        <script src="JS/auto.js"></script>
+        <!-- Import pure.css -->
+        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+            integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Google font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+        <!-- CSS file -->
+        <link rel="stylesheet" type="text/css" href="css/style2.css" media="all">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Onest&family=Playfair+Display&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="page">
+            <!-- pure grid group -->
+            <div class="pure-g">
+                <div class="pure-u-1-1">
+                    <div class = "main-title">
+                        <h1 style="font-size: 40px;">World GDP</h1>
+                        <p style="font-weight: 500;font-size: 20px;">How does it affect the way we live and where we live?</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end pure grid group -->
+            <!-- pure grid group -->
+            <div class="pure-g">
+                <div class="pure-u-1-1">
+                    <div class="description description-left">
+                        <h2 style="font-family: serif;font-weight: 550;">GDP across the World</h2>
+                        <p class="title-line"></p>
+                        <p style="font-family: sans-serif;">The 2021 Gross Domestic Product (GDP) around the world highlights stark 
+                            disparities in eoconomic levels. Powerhouses such as the United States, Luxembourg, Germany, Japan stand 
+                            out easily. However, most of Africa can be seen well at the bottom of the spectrum, as well as multiple 
+                            asian countries. This map demonstrates the clear gap between developed countries and the majority of 
+                            developing countries. It goes a long way to show that even today, a lot of work has to be done to close 
+                            the gap between the rich and the poor. 
+                            <br>But what does this mean for the world's population? Why should we strive for a high GDP? 
+                            What aspects of our lives and environment are affectedby the GDP? 
+                            This visualisation aims to answer these questions.  
+                            <br>                           
+                            <br> 👆🏼 Hover on the map to view more information about each country.
+                        </p>
+                        <div class="map-container" id="gdp_per_capita_map"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end pure grid group -->
+            <!-- pure grid group -->
+            <div class="pure-g">
+                <div class="pure-u-1-1">
+                    <h2 style="font-family: serif;font-weight: 550;">GDP of some top countries over the years</h2>
+                </div>
+                <p class="title-line"></p>
+                <div class="pure-u-1-1">
+                    <div id="chart" class="vis-container"></div>
+                    <input type="checkbox" id="toggle" class="toggleCheckbox" />
+                    <label for="toggle" class='toggleContainer'>
+                        <div>GDP across the years</div>
+                        <div>Full Chart</div>
+                    </label>
+                </div>
+                <div class="pure-u-1-1">
+                    <div class="description description-left">
+                        <p style="font-family: sans-serif;">
+                            With its small population, Luxembourg has come out first every year since 1990 in terms of GDP per capita.
+                            It has massively increased the gap over the last 10 years and it seems hard to imagine another country catching
+                            up to it in the next couple of years. The other 4 powerhouses, namely, Australia United States, United Kingdom and
+                            Singapore have had an overall increase in their GDP over the last 30 years. However, Australia has had a few ups and downs
+                            recently, but they seem to be on the right track once again. China is a good example of a country that is on the rise but still
+                            has a lot of catching up to do. 
+                            <br>                           
+                            <br> 👆🏼 Hover on the chart to view more information about the countries.
+                            <br>
+                            <br> ↔️ Toggle the slider to either view the entier line chart or to see how the GDP has been changing across these countries year by year.
+     
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- end pure grid group -->
+            <!-- pure grid group -->
+            <div class="pure-g">
+              <div class="pure-u-1-1">
+                  <div class="description description-left">
+                      <h2 style="font-family: serif;font-weight: 550;">GDP and Life Expectancy</h2>
+                      <p class="title-line"></p>
+                      <p style="font-family: sans-serif;">
+                        Life expectancy is often linked to the GDP of a country. After all, the better the economy, the better the health services provided
+                        to the population. This is evident in the scatter plot below. The countries with the highest GDP per capita also have the highest life expectancy.
+                        Luxembourg is once again the clear winner, and has been for multiple years. What's interesting in this scatter plot, is that a lot of countries
+                        despite not having the same GDP as Luxembourg, has similar life expectancies. A clear gap can be seen between the countries completely
+                        at the left of the plot, and thos in the middle. This shows that a certain level of GDP is required to provide a good life expectancy. 
+                        As long as the basic care can be provided, it goes a long way to ensuring a better life expectancy. This comes as good news for developing countries
+                        as it means that the gap to improve qulity of life is more achievable.
+                        <br>                           
+                            <br> 👆🏼 Hover on the chart to view more information about the countries. Clicking on a country will also provide its path and highlight it. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regions can also be highlighted through the legend.
+                            <br>
+                            <br> ↔️ Toggle the slider to view the scatter plot for each year from 1990 to 2021.
+                      </p>
+                      <div class="vis2" id="scatter-plot"></div>
+                  </div>
+              </div>
+          </div>
+            <div class="pure-g">
+                <div class="pure-u-1-1">
+                    <h2 style="font-family: serif;font-weight: 550;">GDP and Happiness</h2>
+                </div>
+                <p class="title-line"></p>
+                <div class="pure-u-1-2">
+                    <div id="butterfly-chart" class="vis-container"></div>
+                    <input type="checkbox" id="button-butter" class="toggleCheckbox" />
+                    <label for="button-butter" class='toggleContainer'>
+                        <div>By Year</div>
+                        <div>By Region</div>
+                    </label>
+                </div>
+            <div class="pure-u-1-2">
+                <div class="description description-left">
+                    <p>
+                        <span id="butterfly-text" style="font-family: sans-serif;"></span>
+                        <br><br> ↔️ Toggle the slider button to view the data by years of by region.
+                    </p>
+                </div>
+            </div>
+          </div>
+          <div class="pure-g">
+            <div class="pure-u-1-1">
+                <div class="description description-left">
+                    <h2 style="font-family: serif;font-weight: 550;">GDP and Migration: Money Attracts</h2>
+                    <p class="title-line"></p>
+                    <p style="font-family: sans-serif;">A quick look at the map below tells the whole story. The bigger circles can be 
+                        seen clearly on the countries with the highest GDP or highest increase in GDP. The United States is the clear winner, not just in 2021,
+                        but has been for many years. People from all around the world are still looking for the American dream. Countries in Africa have very small dots on them, demonstrating
+                        a very small number of migrants. This is mainly due to a low GDP and hence a lower quality of life. Improving the quality of life in these regions,
+                        and attracting more migrants could be the best way to close the gap between the rich and the poor.
+                        <br> <br>👆🏼 Hover on the map to view more information about migration in each country. The lines represent from where the migrants are coming from. Scroll in to zoom in the map.
+                            <br>
+                            <br> ↔️ Toggle the slider button to view the map zoomed around the desired continent.
+                    </p>
+                    <div class="vis4" id="symbol-map"></div>
+                    <input type="checkbox" id="button-symbol" class="toggleCheckbox" />
+                    <label for="button-symbol" class='toggleContainer'>
+                        <div>World Map</div>
+                        <div>Regional Map</div>
+                    </label>
+                </div>
+            </div>
         </div>
-        <div id="life_expectancy">
-          <div class="container-title">How GDP affects life expectancy</div>
-          <div class="title-line"></div>
-            <div class="map-container2" id="life_expectancy_map"></div>
-            <div class="map-container6" >This bubble chart demonstrates the relationship between between GDP and Life expectancyfor all countries across the world. It can be seen that African countries have a lower life expectancy and GDP compared to other regions. Luxembourg has the highest GDP while Switwerland and Japan have the highest life expectancy in 2021. Scroll the slider to view how the data changes from 1990 to 2021. Clicking on a country will show it's path and highlight that country. Choosing a region from the legend while spotlight the countries from these regions on the bubble chart.
-              .</div>
+        <div class="pure-g">
+            <div class="pure-u-1-1 small-font">
+                <p>This visualisation is created by Lavneesh Avi Gaya (Student ID: 31405924) for FIT3179. .
+                    The datasource is <a href="https://ourworldindata.org/" target=" _blank">our world in data</href></a> and <a href="https://www.kaggle.com/" target=" _blank">kaggle</href></a>.
+                </p>
+            </div>
         </div>
-    </div>
 
-    <script type="text/javascript">
-        var specVis1 = "JS/bubble_chart.vg.json";
-        var specVis2 = "JS/World_GDP_per_Capita.vg.json";
-    
-        vegaEmbed('#life_expectancy_map', specVis1, { "actions": false });
-    
-        vegaEmbed('#gdp_per_capita_map', specVis2, { "actions": false }).then(function (result) {
-            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-        }).catch(console.error);
-    </script>
-</body>
+
+        <!-- end pure grid group -->
+
+        </div> <!-- end page -->
+        <script type="text/javascript">
+            var specVis1 = "JS/World_GDP_per_Capita.vg.json";
+            var specVis2 = "JS/bubble_chart.vg.json";
+            var specVis3 = "JS/Butterfly.vg.json";
+            var specVis4 = "JS/nodeMapWorld.vg.json"
+            var button1 = true;
+            var button2 = true;
+            document.getElementById("butterfly-text").innerHTML = "We have often heard that money does not buy happiness, but does money make a country happier? The GDP and happiness score of each country across the different continents were averaged and plotted. Turns out money does make us happier. Looking at the butterfly chart on the left, the countries with the highest GDP also have the highest happiness score. Continents like Africa and Asia have a lower GDP and hence lower happiness score.  <br><br> ↔️ Move the slider to view how the data changes for each year from 2015 to 2021.";
+            
+            
+            vegaEmbed('#gdp_per_capita_map', specVis1, { "actions": false });
+            
+            vegaEmbed('#scatter-plot', specVis2, { "actions": false }).then(function (result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            
+            vegaEmbed('#butterfly-chart', specVis3, { "actions": false }).then(function (result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            
+            vegaEmbed('#symbol-map', specVis4, { "actions": false }).then(function (result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+
+            document.getElementById("button-butter").onclick = function() {
+            button1 = !button1
+            // Load and display Visualization 1 from an external .vg.json file
+            if(button1){
+              specVis3 = "JS/Butterfly.vg.json";
+              this.innerText = 'By Region';
+              document.getElementById("butterfly-text").innerHTML = "We have often heard that money does not buy happiness, but does money make a country happier? The GDP and happiness score of each country across the different continents were averaged and plotted. Turns out money does make us happier. Looking at the butterfly chart on the left, the countries with the highest GDP also have the highest happiness score. Continents like Africa and Asia have a lower GDP and hence lower happiness score.  <br><br> ↔️ Move the slider to view how the data changes for each year from 2015 to 2021.";
+              vegaEmbed('#butterfly-chart', specVis3, { "actions": false }).then(function (result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            }
+            else{
+              specVis3 = "JS/dualAxisLineChart.vg.json";
+              this.innerText = 'By Year';
+              document.getElementById("butterfly-text").innerHTML = "Viewing the data by continents across the years, it can be harder to view a direct relationship between GDP and happiness. This is because the happiness score is not solely dependent on the GDP. Other factors such as health, quality of life and freedom also matter significantly. Apart from Oceania and the Americas, all other continents have their average GDP on the rise which is good news to those countries.  <br><br> 👆🏼 Choose the desired continent to visualise the GDP and happiness score for each year from 2015 to 2021.";
+              vegaEmbed('#butterfly-chart', specVis3, { "actions": false }).then(function (result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            }
+          };
+            document.getElementById("button-symbol").onclick = function() {
+            button2 = !button2
+            // Load and display Visualization 1 from an external .vg.json file
+            if(button2){
+              specVis4 = "JS/nodeMapWorld.vg.json";
+              vegaEmbed('#symbol-map', specVis4, { "actions": false }).then(function (result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            }
+            else{
+              specVis4 = "JS/nodeMapByRegion.vg.json";
+              vegaEmbed('#symbol-map', specVis4, { "actions": false }).then(function (result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            
+            }).catch(console.error);
+            }
+            
+        };
+
+        
+        </script>
+    </body>
 </html>

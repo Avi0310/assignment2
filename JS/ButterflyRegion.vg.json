@@ -48,7 +48,12 @@
       },
       "color": {
         "field": "Continents", "type": "nominal","legend":null
-      }
+      },
+      "tooltip":[
+        {"field":"Year","type":"ordinal", "title": "Year"},
+        {"field":"Average GDP","type":"quantitative"},
+        {"field":"Average Happiness Index","type":"quantitative"}
+      ]
     }
     
   }, 
