@@ -1,6 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "An interactive visualization of connections among major U.S. airports in 2008.",
+  "title":"Migration (2021)",
   "params": [
     {
       "name": "zoom_level",
@@ -88,7 +89,7 @@
       }
     },
     {
-      "mark": { "type": "circle", "color": "green" },
+      "mark": { "type": "circle", "color": "orangered" },
       "data": { "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/clean-emigrants-data.csv" },
       "transform": [
         { "aggregate": [{ "op": "sum", "field": "Number", "as": "TotalNumber" }], "groupby": ["Destination"] },
@@ -121,7 +122,8 @@
         "size": {
           "field": "parsedNumber",
           "type": "quantitative",
-          "scale": { "rangeMax": 1000 }
+          "scale": { "rangeMax": 1000 },
+          "title":"Number of migrants"
         },
         "tooltip": [
           { "field": "Origin", "type": "nominal", "title": "Country" },

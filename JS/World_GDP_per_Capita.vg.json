@@ -7,7 +7,7 @@
   "projection": {"type": "equalEarth"},
   "config": {"view": {"stroke": null}},
   "data": {
-    "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/ne_110m%20(3).json",
+    "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/JS/ne_110m%20(3).json",
     "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
   },
   "layer":
@@ -23,14 +23,14 @@
     },
     {
       "data":{
-        "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/oceans.topojson",
+        "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/JS/oceans.topojson",
         "format": {"type": "topojson", "feature": "oceans"}
       },
       "mark": { "type": "geoshape", "fill": "#c8e2f8" }
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/js/ne_110m%20(3).json",
+        "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/JS/ne_110m%20(3).json",
         "format": { "type": "topojson", "feature": "ne_110m_graticules_30" }
       },
       "mark": { "type": "geoshape", "fill": null, "stroke": "gray" }
@@ -44,7 +44,7 @@
           {
             "data": 
             {
-              "url": "https://raw.githubusercontent.com/Avi0310/fit3179-hw/main/data/GDP%20data.csv"
+              "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/GDP%20data.csv"
             },
             "key": "Entity",
             "fields": ["GDP per capita, PPP (constant 2017 international $)"]

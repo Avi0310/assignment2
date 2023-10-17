@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "A dual axis chart, created by setting y's scale resolution to `\"independent\"`",
-  "width": 350, "height": 200,
+  "width": 350, "height": 150,
   "data": {
     "url": "https://raw.githubusercontent.com/Avi0310/assignment2/master/Data/GDPHappinessdata.csv"
   },

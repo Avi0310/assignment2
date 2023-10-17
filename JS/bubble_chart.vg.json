@@ -38,14 +38,11 @@
             "data": {
               "values": [
                 {"id": "Africa", "name": "Africa"},
-                {"id": "Arab States", "name": "Arab States"},
-                {"id": "South/Central America", "name": "South/Central America"},
                 {"id": "North America", "name": "North America"},
-                {"id": "Asia & Pacific", "name": "Asia & Pacific"},
-                {"id": "Middle east", "name": "Middle East"},
+                {"id": "Asia", "name": "Asia"},
                 {"id": "Europe", "name": "Europe"},
-                {"id": "South/Latin America", "name": "South/Latin America"},
-                {"id": "#N/A", "name": "Africa"}
+                {"id": "South America", "name": "South America"},
+                {"id": "Oceania", "name": "Oceania"}
               ]
             }
           }
