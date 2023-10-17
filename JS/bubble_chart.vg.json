@@ -145,7 +145,7 @@
             "#444e86",
             "#e78ac3",
             "#00d9e9",
-            "#ffa600"]}}
+            "#FFD580"]}}
             
           }
           
@@ -157,13 +157,23 @@
           "transform": [{"filter": {"param": "Year"}}],
           "mark":{
             "type": "text",
-            "align":"center",
-            "baseline":"middle",
-            "dx": -0,
+            "align":"left",
+            "baseline":"line-bottom",
+            "dx": -20,
             "fontSize": 12,
             "fontStyle":"italic"
+          },
+          "encoding": {
+            "text":{"field":"Country", "type":"nominal"},
+            "color":{"value":"black"},
+            "opacity":{
+              "condition":{
+                "test":"datum.Country=='Australia' || datum.Country=='China' || datum.Country=='Luxembourg'|| datum.Country=='Singapore' || datum.Country=='United States' ||datum.Country=='United Kingdom'",
+                "value":1
+              },
+              "value":0
+            }
           }
-          
           
 
         },
@@ -193,7 +203,7 @@
             "#444e86",
             "#e78ac3",
             "#00d9e9",
-            "#ffa600"]}}
+            "#FFD580"]}}
           }
         },
         {
